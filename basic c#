@@ -24,6 +24,29 @@ public class Learning_C_sharp {
         Console.WriteLine ("message a concat with "+"message b using +");
         
         //functions:
-        
+        void do_nothing(){}
+        //calling inside class insider func (no need for static in func declaration):
+        do_nothing();
+        //calling inside class outer func, + casting (down) example:
+        Console.WriteLine(check_statement((int)-1.999)); //(static needed)
     }
+    static bool check_statement(int i){
+        //conditions:
+        if (i!=0) //==, !=, &&,||,<=,>=, >,<.
+            switch(i){
+                default:
+                Console.WriteLine("default switch case");
+                return false;
+                case(1):
+                Console.WriteLine("case 1, i = 1");
+                break;
+                case(2):
+                Console.WriteLine("case 2, i = 2");
+                return false;
+            }
+        return true;
+    }
+    // Collections variable:
+    int []array_ex1=new int[5]; //default 0 zeros as value not initiated
+    int []array_ex2=new int[]{1,2,3}; //size 3 at init
 }
