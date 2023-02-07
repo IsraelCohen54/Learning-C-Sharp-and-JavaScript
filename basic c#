@@ -1,0 +1,29 @@
+using System;
+
+public class Learning_C_sharp {
+    
+    public static void Main(string[] args) {//'Main': needed for prog start
+        //variables:
+        int a =1;
+        float b_not_exact_num = 3.333F; //d for double
+        float c_not_exact_num = 10_000.5f;  //D for double
+        double d_not_exact_num = 1.111;
+        float x = 1f / 3f;
+        double y = 1d / 3d;
+        decimal precise_res = 1m / 3m;
+
+        Console.WriteLine(x);
+        Console.WriteLine(y);
+        Console.WriteLine(precise_res + " decimal - precise_res");
+
+        bool is_true = false;
+        char character = '~'; // using '' and not: ""
+        string text_or_many_chars = "a message for you"; //"" and not: ''
+        
+        //string concat:
+        Console.WriteLine ("message a concat with "+"message b using +");
+        
+        //functions:
+        
+    }
+}
