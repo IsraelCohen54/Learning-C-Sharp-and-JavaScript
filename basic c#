@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;  //for List
 
 public class Learning_C_sharp {
     
@@ -28,9 +29,10 @@ public class Learning_C_sharp {
         //calling inside class insider func (no need for static in func declaration):
         do_nothing();
         //calling inside class outer func, + casting (down) example:
-        Console.WriteLine(check_statement((int)-1.999)); //(static needed)
+        Console.WriteLine(learn_statement((int)-1.999)); //(static needed)
+        learn_collections();
     }
-    static bool check_statement(int i){
+    static bool learn_statement(int i){
         //conditions:
         if (i!=0) //==, !=, &&,||,<=,>=, >,<.
             switch(i){
@@ -46,7 +48,37 @@ public class Learning_C_sharp {
             }
         return true;
     }
+    static void learn_collections(){   
     // Collections variable:
-    int []array_ex1=new int[5]; //default 0 zeros as value not initiated
-    int []array_ex2=new int[]{1,2,3}; //size 3 at init
+    //static array:
+    int [] array_ex1 = new int[5]; //default 0 zeros as value not initiated
+    int [] array_ex2 = new int[]{1,2,3}; //size 3 at init
+    
+    //dynamic array:
+    List<int> int_list = new List<int>(){1,2};
+    List<int> int_list_without_args = new List<int>{1,2};
+    Console.WriteLine(string.Join(", ", int_list_without_args)); //printing
+    foreach (int element in int_list_without_args) // print using foreach
+        Console.Write(element+", ");
+    int_list.Add(0);
+    int_list_without_args.Remove(1);
+    
+    //dictionary:
+    IDictionary<int, string> numberNames = new Dictionary<int, string>();
+    numberNames.Add(1,"One"); //adding a key/value using the Add() method
+    numberNames.Add(2,"Two");
+    //numberNames.Add(2, "Two"); //run-time exception: key already added.
+    
+    foreach(KeyValuePair<int, string> kvp in numberNames)
+        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+		
+    //creating a dictionary using collection-initializer syntax
+    var cities = new Dictionary<string, string>(){
+    	{"UK", "London, Manchester, Birmingham"},
+    	{"India", "Mumbai, New Delhi, Pune"}
+    };
+    foreach(var kvp in cities) //printing
+        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+    }
+    
 }
