@@ -1,0 +1,66 @@
+//Another example of Polymorphism:
+
+class Shape {
+  constructor(type) {
+    this.type = type;
+  }
+  getType() {
+    return this.type;
+  }
+}
+
+class Square extends Shape {
+  constructor(side) {
+    super('Square');
+    this.side = side;
+  }
+  area() {
+    return this.side * this.side;
+  }
+}
+
+class Circle extends Shape {
+  constructor(radius) {
+    super('Circle');
+    this.radius = radius;
+  }
+  area() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+const handleShapeClick = (e) => {
+  const target = e.target;
+  const shapeType = target.getAttribute('data-shape-type');
+  let shape;
+  switch (shapeType) {
+    case 'Square':
+      shape = new Square(10);
+      break;
+    case 'Circle':
+      shape = new Circle(5);
+      break;
+    default:
+      shape = null;
+  }
+  if (shape) {
+    console.log(`Area of ${shape.getType()}: ${shape.area()}`);
+  }
+};
+
+const createShapeElements = () => {
+  const shapesContainer = document.getElementById('shapes-container');
+  const squareBtn = document.createElement('button');
+  squareBtn.innerText = 'Square';
+  squareBtn.setAttribute('data-shape-type', 'Square');
+  squareBtn.addEventListener('click', handleShapeClick);
+  shapesContainer.appendChild(squareBtn);
+  
+  const circleBtn = document.createElement('button');
+  circleBtn.innerText = 'Circle';
+  circleBtn.setAttribute('data-shape-type', 'Circle');
+  circleBtn.addEventListener('click', handleShapeClick);
+  shapesContainer.appendChild(circleBtn);
+};
+
+createShapeElements();
