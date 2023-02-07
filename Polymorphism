@@ -1,0 +1,61 @@
+//  Polymorphism is achieved by having multiple objects with similar behavior but unique properties.
+//  In this example, handlers and server-side object-oriented programming (*explained below) are used to create,
+//  choose, and define elements and events:
+
+using System;
+
+abstract class Shape {
+    public abstract double Area();
+    public abstract string GetType();
+}
+
+class Square : Shape {
+    private double side;
+
+    public Square(double side) {
+        this.side = side;
+    }
+
+    public override double Area() {
+        return side * side;
+    }
+
+    public override string GetType() {
+        return "Square";
+    }
+}
+
+class Circle : Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public override double Area() {
+        return Math.PI * radius * radius;
+    }
+
+    public override string GetType() {
+        return "Circle";
+    }
+}
+
+class Program {
+    static void Main(string[] args) {
+        Console.WriteLine("Choose a shape: (1) Square, (2) Circle");
+        int choice = int.Par
+    }
+}
+
+//  (*)
+//  Server-side object-oriented programming refers to a programming paradigm where the majority of the code logic
+//  is executed on the server side of an application, rather than on the client side.
+//  In this model, objects on the server are created, manipulated,
+//  and interact with each other to carry out the necessary tasks for the application.
+//  The resulting data is then sent to the client side to be displayed to the user.
+//  This approach to programming is called "object-oriented" because the code is organized into objects,
+//  each with its own properties and methods, and is executed on a server,
+//  which is typically a centralized and more powerful system.
+//  By utilizing server-side object-oriented programming,
+//  developers can build applications that are more secure, scalable, and able to handle a large volume of data and user interactions.
