@@ -33,7 +33,7 @@ public class Learning_C_sharp {
         learn_collections();
     }
     static bool learn_statement(int i){
-        //conditions:
+        //conditions: // while(){}, do{}while())
         if (i!=0) //==, !=, &&,||,<=,>=, >,<.
             switch(i){
                 default:
@@ -48,6 +48,7 @@ public class Learning_C_sharp {
             }
         return true;
     }
+    List<int> int_list = new List<List<int>> {1,2};
     static void learn_collections(){   
     // Collections variable:
     //static array:
@@ -60,6 +61,10 @@ public class Learning_C_sharp {
     Console.WriteLine(string.Join(", ", int_list_without_args)); //printing
     foreach (int element in int_list_without_args) // print using foreach
         Console.Write(element+", ");
+    Console.Write("\n");
+    for (int j=0; j<int_list.Count; j++)
+        Console.WriteLine("index: "+j+" value: "+int_list[j]);
+    Console.Write("\n");
     int_list.Add(0);
     int_list_without_args.Remove(1);
     
@@ -73,12 +78,26 @@ public class Learning_C_sharp {
         Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
 		
     //creating a dictionary using collection-initializer syntax
+    /* var is a keyword, it is used to declare an implicit type variable, that specifies the type of a variable based on initial value.*/
     var cities = new Dictionary<string, string>(){
     	{"UK", "London, Manchester, Birmingham"},
     	{"India", "Mumbai, New Delhi, Pune"}
     };
     foreach(var kvp in cities) //printing
         Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+        
+    //classes:
+    class Point {
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
+    /* class usage example:
+    Point point = new Point { X = 1, Y = 2 };
+    Console.WriteLine(point.X); // Output: 1
+    Console.WriteLine(point.Y); // Output: 2
+    point.X = 3;
+    Console.WriteLine(point.X); // Output: 3
+    */
     }
     
 }
