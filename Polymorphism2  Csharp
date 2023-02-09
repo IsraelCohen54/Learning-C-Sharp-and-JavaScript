@@ -1,0 +1,48 @@
+// Defining an interface
+public interface IPayable
+{
+    decimal CalculatePay();
+}
+
+// Implementing the interface in a class
+public class Employee : IPayable
+{
+    public decimal Salary { get; set; }
+
+    public decimal CalculatePay()
+    {
+        return Salary;
+    }
+}
+
+public class Contractor : IPayable
+{
+    public decimal HourlyRate { get; set; }
+    public int HoursWorked { get; set; }
+
+    public decimal CalculatePay()
+    {
+        return HourlyRate * HoursWorked;
+    }
+}
+
+// Using polymorphism in the main method
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Upcasting
+        IPayable[] payables = new IPayable[2];
+        payables[0] = new Employee { Salary = 5000 };
+        payables[1] = new Contractor { HourlyRate = 50, HoursWorked = 40 };
+
+        foreach (var payable in payables)
+        {
+            Console.WriteLine(payable.CalculatePay());
+        }
+
+        // Downcasting
+        Employee employee = payables[0] as Employee;
+        Console.WriteLine(employee.Salary);
+    }
+}
