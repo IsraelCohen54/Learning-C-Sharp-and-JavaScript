@@ -1,103 +1,41 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
 using System;
-using System.Collections.Generic;  //for List
 
-public class Learning_C_sharp {
-    
-    public static void Main(string[] args) {//'Main': needed for prog start
-        //variables:
-        int a =1;
-        float b_not_exact_num = 3.333F; //d for double
-        float c_not_exact_num = 10_000.5f;  //D for double
-        double d_not_exact_num = 1.111;
-        float x = 1f / 3f;
-        double y = 1d / 3d;
-        decimal precise_res = 1m / 3m;
+public class HelloWorld
+{
+    class Human
+{
+    private int age;
+    private string name;
 
-        Console.WriteLine(x);
-        Console.WriteLine(y);
-        Console.WriteLine(precise_res + " decimal - precise_res");
+    public Human(int age, string name)
+    {
+        this.age = age;
+        this.name = name;
+    }
 
-        bool is_true = false;
-        char character = '~'; // using '' and not: ""
-        string text_or_many_chars = "a message for you"; //"" and not: ''
-        
-        //string concat:
-        Console.WriteLine ("message a concat with "+"message b using +");
-        
-        //functions:
-        void do_nothing(){}
-        //calling inside class insider func (no need for static in func declaration):
-        do_nothing();
-        //calling inside class outer func, + casting (down) example:
-        Console.WriteLine(learn_statement((int)-1.999)); //(static needed)
-        learn_collections();
+    public int Age
+    {
+        get { return age; }
+        set { age = value; }
     }
-    static bool learn_statement(int i){
-        //conditions: // while(){}, do{}while())
-        if (i!=0) //==, !=, &&,||,<=,>=, >,<.
-            switch(i){
-                default:
-                Console.WriteLine("default switch case");
-                return false;
-                case(1):
-                Console.WriteLine("case 1, i = 1");
-                break;
-                case(2):
-                Console.WriteLine("case 2, i = 2");
-                return false;
-            }
-        return true;
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
     }
-    List<int> int_list = new List<List<int>> {1,2};
-    static void learn_collections(){   
-    // Collections variable:
-    //static array:
-    int [] array_ex1 = new int[5]; //default 0 zeros as value not initiated
-    int [] array_ex2 = new int[]{1,2,3}; //size 3 at init
-    
-    //dynamic array:
-    List<int> int_list = new List<int>(){1,2};
-    List<int> int_list_without_args = new List<int>{1,2};
-    Console.WriteLine(string.Join(", ", int_list_without_args)); //printing
-    foreach (int element in int_list_without_args) // print using foreach
-        Console.Write(element+", ");
-    Console.Write("\n");
-    for (int j=0; j<int_list.Count; j++)
-        Console.WriteLine("index: "+j+" value: "+int_list[j]);
-    Console.Write("\n");
-    int_list.Add(0);
-    int_list_without_args.Remove(1);
-    
-    //dictionary:
-    IDictionary<int, string> numberNames = new Dictionary<int, string>();
-    numberNames.Add(1,"One"); //adding a key/value using the Add() method
-    numberNames.Add(2,"Two");
-    //numberNames.Add(2, "Two"); //run-time exception: key already added.
-    
-    foreach(KeyValuePair<int, string> kvp in numberNames)
-        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
-		
-    //creating a dictionary using collection-initializer syntax
-    /* var is a keyword, it is used to declare an implicit type variable, that specifies the type of a variable based on initial value.*/
-    var cities = new Dictionary<string, string>(){
-    	{"UK", "London, Manchester, Birmingham"},
-    	{"India", "Mumbai, New Delhi, Pune"}
-    };
-    foreach(var kvp in cities) //printing
-        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
-        
-    //classes:
-    class Point {
-        public int X { get; set; }
-        public int Y { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Human person = new Human(30, "John");
+        Console.WriteLine("Age: " + person.Age + ", Name: " + person.Name);
     }
-    /* class usage example:
-    Point point = new Point { X = 1, Y = 2 };
-    Console.WriteLine(point.X); // Output: 1
-    Console.WriteLine(point.Y); // Output: 2
-    point.X = 3;
-    Console.WriteLine(point.X); // Output: 3
-    */
-    }
+}
     
 }
