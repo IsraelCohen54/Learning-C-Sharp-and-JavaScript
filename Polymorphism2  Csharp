@@ -46,3 +46,19 @@ class Program
         Console.WriteLine(employee.Salary);
     }
 }
+
+/* //for dynamic array:
+List<IPayable> payables = new List<IPayable>();
+
+// Adding an object to the list
+payables.Add(new Invoice());
+
+// Inserting an object at a specific index
+payables.Insert(0, new Employee());
+
+// Removing an object from the list
+payables.RemoveAt(0);
+
+// And if we would like to, we can convert the list to an array (fixed size), while keeping payables usable.
+IPayable[] payableArray = payables.ToArray();
+*/
