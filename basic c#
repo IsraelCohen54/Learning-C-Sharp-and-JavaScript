@@ -38,10 +38,11 @@ public class Learning_C_sharp {
         //Strings concat:
         Console.WriteLine ("message a concat with "+"message b using +");
         
-        //Getting input from the user:
-        //string input = Console.ReadLine();
+        // Getting input from the user:
+        // string input = Console.ReadLine();
+	// int count = int.Parse(Console.ReadLine());
         
-        //functions:
+        // functions:
         void do_nothing(){}
         //calling inside class insider func (no need for static in func declaration):
         do_nothing();
