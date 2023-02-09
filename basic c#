@@ -1,11 +1,25 @@
 using System;
 using System.Collections.Generic;  //for List
 
+//enum example of real usage: (inside Main method)
+        enum DaysOfWeek
+        {
+            Monday,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+            Sunday
+        }
+
 public class Learning_C_sharp {
     
-    public static void Main(string[] args) {//'Main': needed for prog start
+    
+    /*Main is a special method that acts as the entry point for a C# application. The Main method is the first method that is executed when a C# program is run, and is where the code execution starts.*/
+    public static void Main(string[] args) {
         //variables:
-        int a =1;
+        int a = 1;
         float b_not_exact_num = 3.333F; //d for double
         float c_not_exact_num = 10_000.5f;  //D for double
         double d_not_exact_num = 1.111;
@@ -34,9 +48,37 @@ public class Learning_C_sharp {
         //calling inside class outer func, + casting (down) example:
         Console.WriteLine(learn_statement((int)-1.999)); //(static needed)
         learn_collections();
+        
+        //enum - defined outer of Main class
+        DaysOfWeek today = (DaysOfWeek)DateTime.Today.DayOfWeek;
+        
+        switch (today) {
+            case DaysOfWeek.Monday:
+                Console.WriteLine("Today is Monday.");
+                break;
+            case DaysOfWeek.Tuesday:
+                Console.WriteLine("Today is Tuesday.");
+                break;
+            case DaysOfWeek.Wednesday:
+                Console.WriteLine("Today is Wednesday.");
+                break;
+            case DaysOfWeek.Thursday:
+                Console.WriteLine("Today is Thursday.");
+                break;
+            case DaysOfWeek.Friday:
+                Console.WriteLine("Today is Friday.");
+                break;
+            case DaysOfWeek.Saturday:
+                Console.WriteLine("Today is Saturday.");
+                break;
+            case DaysOfWeek.Sunday:
+                Console.WriteLine("Today is Sunday.");
+                break;
+        }
     }
+    
     static bool learn_statement(int i){
-        //conditions: // while(){}, do{}while())
+        //conditions: // while(){}, do{}while()
         if (i!=0) //==, !=, &&,||,<=,>=, >,<.
             switch(i){
                 default:
