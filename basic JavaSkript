@@ -1,0 +1,189 @@
+// JavaScript does not have the concept of "static" variables, so this declaration is not needed
+// The equivalent to a C# boolean function in JavaScript is a regular function that returns a boolean value
+function learnStatement(i) {
+  // In JavaScript, the equivalent of the C# "if" statement is the same
+  if (i !== 0) {
+    // In JavaScript, the equivalent of the C# "switch" statement is the "switch" statement
+    switch (i) {
+      default:
+        console.log("default switch case");
+        return false;
+      case 1:
+        console.log("case 1, i = 1");
+        break;
+      case 2:
+        console.log("case 2, i = 2");
+        return false;
+    }
+  }
+  return true;
+}
+
+// In JavaScript, there is no equivalent of C#'s "static" keyword
+// For dynamic arrays, you can use JavaScript arrays with the push() and splice() methods
+function learnCollections() {
+  // Static arrays can be declared using an array literal
+  var arrayEx1 = new Array(5).fill(0); // an array of 5 elements, all with value 0
+  var arrayEx2 = [1, 2, 3]; // an array with 3 elements, with the specified values
+
+  // Dynamic arrays can be declared using an array literal and adding elements using the push() method
+  var intList = [1, 2];
+  var intListWithoutArgs = [1, 2];
+  console.log(intListWithoutArgs.join(", ")); // printing the array as a string, separated by comma
+
+  // In JavaScript, the equivalent of the C# "foreach" loop is the "for...of" loop
+  for (var element of intListWithoutArgs) {
+    console.log(element + ", ");
+  }
+  console.log("\n");
+
+  // Looping through an array and printing the index and value
+  for (var j = 0; j < intList.length; j++) {
+    console.log("index: " + j + " value: " + intList[j]);
+  }
+  console.log("\n");
+
+  // Adding an element to the end of the array
+  intList.push(0);
+
+  // Removing an element from the array
+  var index = intListWithoutArgs.indexOf(1);
+  if (index !== -1) {
+    intListWithoutArgs.splice(index, 1);
+  }
+}
+
+//Classes in JavaScript
+
+//A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).
+
+class Animal {
+  //Attributes/Properties
+  constructor(name, type) {
+    this.name = name;
+    this.type = type;
+  }
+  
+  //Methods
+  getName() {
+    return this.name;
+  }
+  
+  getType() {
+    return this.type;
+  }
+}
+
+//Inheritance in JavaScript
+
+//Inheritance is a way to create a new class that is a modified version of an existing class. The new class is called the subclass, and the existing class is the superclass.
+
+class Mammal extends Animal {
+  constructor(name, type, isWarmBlooded) {
+    super(name, type);
+    this.isWarmBlooded = isWarmBlooded;
+  }
+  
+  getIsWarmBlooded() {
+    return this.isWarmBlooded;
+  }
+}
+
+//Event Handlers in JavaScript
+
+//An event handler is a function that you define in your script and attach to an element using JavaScript code. When an event occurs on an element, such as a button click, the event handler will be executed.
+
+//For example, the following code will change the text of a button when it's clicked:
+
+document.getElementById("myButton").addEventListener("click", function() {
+  document.getElementById("myButton").innerHTML = "Button was clicked";
+});
+
+//Using Classes in JavaScript
+
+const animal = new Animal("Tiger", "Carnivore");
+console.log(animal.getName()); // Output: Tiger
+console.log(animal.getType()); // Output: Carnivore
+
+const mammal = new Mammal("Elephant", "Herbivore", true);
+console.log(mammal.getName()); // Output: Elephant
+console.log(mammal.getType()); // Output: Herbivore
+console.log(mammal.getIsWarmBlooded()); // Output: true
+
+//Polymorphism in JavaScript
+
+//Polymorphism allows you to call the same method on different objects, and each object will behave differently based on its implementation of that method.
+
+//This can be achieved in JavaScript by using prototypes. For example:
+
+Animal.prototype.makeSound = function() {
+  console.log(`${this.name} makes a sound`);
+};
+
+Mammal.prototype.makeSound = function() {
+  console.log(`${this.name} makes a growl sound`);
+};
+
+const animal2 = new Animal("Lion", "Carnivore");
+const mammal2 = new Mammal("Gorilla", "Herbivore", true);
+
+animal2.makeSound(); // Output: Lion makes a sound
+mammal2.makeSound(); // Output: Gorilla makes a growl sound
+
+// ~~~ //
+//~~~~~~~~~~~~~~~~~~ polymorphism example without prototype ~~~~~
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  
+  makeSound() {
+    console.log(`${this.name} makes a sound`);
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log(`${this.name} barks`);
+  }
+}
+
+class Cat extends Animal {
+  makeSound() {
+    console.log(`${this.name} meows`);
+  }
+}
+
+const dog = new Dog("Rufus");
+const cat = new Cat("Whiskers");
+
+dog.makeSound(); // Output: Rufus barks
+cat.makeSound(); // Output: Whiskers meows
+
+//~~~~~~~~~~~~ polymorphism + interface example without prototype ~~~~~
+interface Animal {
+  makeSound(): void;
+}
+
+class Dog implements Animal {
+  makeSound() {
+    console.log(`Dog barks`);
+  }
+}
+
+class Cat implements Animal {
+  makeSound() {
+    console.log(`Cat meows`);
+  }
+}
+
+const dog = new Dog();
+const cat = new Cat();
+
+dog.makeSound(); // Output: Dog barks
+cat.makeSound(); // Output: Cat meows
+
+/*In the last two examples,
+the makeSound method is called on objects of different classes,
+and each object behaves differently based on its implementation of the method.
+This is the essence of polymorphism.*/
