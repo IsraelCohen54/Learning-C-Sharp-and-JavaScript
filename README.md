@@ -1,8 +1,13 @@
 # Learning-C-Sharp
 C# basic and up<br>
 For my own use.<br>
+Have watched, been helpful: <br>
+c#: <br>
 https://www.youtube.com/watch?v=IFayQioG71A V <br>
+JavsScript: <br>
+https://www.youtube.com/watch?v=vEROU2XtPR8 <br>
 
-Helpfull: <br>
+
+Rellevant sites: <br>
 https://www.csharptutorial.net/csharp-tutorial/csharp-float/ <br>
 https://www.tutorialsteacher.com/csharp
