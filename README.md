@@ -9,5 +9,9 @@ https://www.youtube.com/watch?v=vEROU2XtPR8 <br>
 
 
 Rellevant sites: <br>
+c# <br>
 https://www.csharptutorial.net/csharp-tutorial/csharp-float/ <br>
 https://www.tutorialsteacher.com/csharp
+
+JS: <br>
+https://www.w3schools.com/js/default.asp<br>
