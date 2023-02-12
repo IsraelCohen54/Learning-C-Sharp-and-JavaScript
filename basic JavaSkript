@@ -53,6 +53,146 @@ function learnCollections() {
   }
 }
 
+//basic vid summation: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+console.log("Welcome to JavaScript!"); //print to console, allert print to web
+//variables:
+//~numbers
+var num1 = 1
+var num2 = 2
+alert(num1+num2); // output 3
+alert('res:'+'1'+'2'+' before was: '+3); //output 12 - string concatination
+//~string began with a letter or _ or $, Case sensitive.
+//syntex:
+var myNumber; //camel case:
+var MyFavorieNumber; //partial case
+var my_number; //underscore
+
+//Data Types
+//~Arrays:
+var colors_1 = ['red','blue','green']; //array indexed 0 1 2
+alert(colors_1); //print all
+alert(colors_1[1]); //blue
+//another way to define array:
+var colors_2 = new Array('red','yellow','orange');
+//array assignment:
+colors_2[2]='green';
+alert(colors_2[2]); //green
+
+//adding to array:
+colors_1.push('purple'); //pushed to end of array
+//array can contain multyple types together:
+var numbers_1 = [1,2,'three',0];
+alert(numbers_1.lenght); //3 - 3 var in array
+alert(numbers_1.sort()); //sort by left most letter
+alert(numbers_1.reverse()); //sort by reverse order
+//Loops
+for(var i = 0; i<3;i++){
+    console.log('i value inside for loop: '+i);
+}
+var i=3;
+while(i<6){
+    console.log("while loop: " +i)
+    i++;
+}
+var numbers_2=[1,7,5,22,465,0,0.5];
+numbers_2.forEach(function(numbers_2){console.log("foreach "+numbers_2)});
+
+//Conditionals - If Statements, switches
+var one=1;
+var two=2;
+if(one!=two && one==1){ //!= ||, &&, <=...
+    console.log('this is true'); //=== meaning each datatype has to match
+} else { console.log('this is false'); 
+}
+var fruit = 'banana';
+switch(fruit){
+    case "banana":
+    alert('I have banana');
+    break;
+    case "apple":
+        alert('I love apple');
+        break;
+    default:
+        alert('I love all other fruits');
+        break;
+}
+//Object Literal + Functions:
+var person = {
+    firstName: 'Bred',
+    lastName: 'Traversy',
+    age:50,
+    children:['dan','sara'],
+    adress:{
+        street:'555 somewhere st',
+        city:'Jerusalem',
+        state:'Is'
+    },
+    fullName: function(){
+        return this.firstName +" "+this.lastName;
+    }
+}
+console.log(person.fullName());
+//Object constructor
+var apple = new Object();
+apple.color='red';
+apple.shape = 'round';
+apple.describe = function(){
+    return 'An apple is the color '+this.color+' and is the shape '+this.shape;
+}
+console.log(apple.describe());
+    
+//but if we want many fruit, we dont want to do this for each one, hence:
+//constructor Pattern:
+function Fruit(name, color,shape){
+    this.name = name;
+    this.color=color;
+    this.shape=shape;
+    this.describe=function(){
+        return "name: "+this.name +" color: "+ this.color +" shape: "+this.shape;
+    }
+}
+var apple2 = new Fruit('apple', 'red','round');
+var banana2 = new Fruit('banana', 'yellow','crescent');
+console.log(apple2);
+console.log("apple2.name: "+apple2.name);
+console.log("apple2.describe (function): "+apple2.describe());
+
+var users = [
+    {
+        name:'John Doe',
+        age: 30
+    },
+    {
+        name:'Mark Smith',
+        age: 44
+    }
+    ];
+console.log(users[0].name);
+//Events
+//with interactive web:
+/*<div class="container">
+//doClick - a function below...
+<button onclick="doClick()">Click me</button>
+//another option:
+<button onclick="this.innerHTML='You Clicked!'">Click me</button>
+//nicer option (?):
+<button onclick="changeText(this)">Click me</button>
+//or
+<button onclick="changeText()">Click me</button>
+</div>
+function doClick(){
+    alert('You Clicked!'); }
+function changeText(id){
+    id.innerHTML = 'You Clicked!';
+function changeText(){ //changing the header
+    var heading = document.getElrmentById('heading');
+    heading.innerHTML = 'You Clicked!';
+    // some more at https://www.youtube.com/watch?v=vEROU2XtPR8 55[m]+
+    // some more of Forms & Validation see also..
+}
+*/
+//basic vid summation: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 //Classes in JavaScript
 
 //A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).
