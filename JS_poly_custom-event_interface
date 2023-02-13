@@ -1,0 +1,187 @@
+//an example of code in HTML and JavaScript that implements polymorphism, interface, class and custom events:
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <!-- create a button to trigger custom event -->
+    <button id="printDataBtn">Print Data</button>
+
+    <!-- create a table to display student data -->
+    <table id="studentDataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Year</th>
+          <th>Grades</th>
+          <th>Average</th>
+        </tr>
+      </thead>
+      <tbody id="studentDataTableBody"></tbody>
+    </table>
+    <script>
+      // interface for a person
+      interface Person {
+        name: string;
+        type: string;
+        getData(): string;
+      }
+
+      // class for a student
+      class Student implements Person {
+        name: string;
+        type: string;
+        year: number;
+        grades: number[];
+
+        constructor(name: string, year: number, grades: number[]) {
+          this.name = name;
+          this.type = "Student";
+          this.year = year;
+          this.grades = grades;
+        }
+
+        // calculate average grades of a student
+        getAverage(): number {
+          return this.grades.reduce((sum, grade) => sum + grade) / this.grades.length;
+        }
+
+        // return student data as a string
+        getData(): string {
+          return `
+            Name: ${this.name}
+            Type: ${this.type}
+            Year: ${this.year}
+            Grades: ${this.grades}
+            Average: ${this.getAverage()}
+          `;
+        }
+      }
+
+      // class for a teacher
+      class Teacher implements Person {
+        name: string;
+        type: string;
+        courses: string[];
+
+        constructor(name: string, courses: string[]) {
+          this.name = name;
+          this.type = "Teacher";
+          this.courses = courses;
+        }
+
+        // return teacher data as a string
+        getData(): string {
+          return `
+            Name: ${this.name}
+            Type: ${this.type}
+            Courses: ${this.courses}
+          `;
+        }
+      }
+
+      // array to hold both students and teachers
+      const persons: Person[] = [
+        new Student("Student A", 1, [70, 80, 90]),
+        new Student("Student B", 2, [60, 70, 80]),
+        new Teacher("Teacher X", ["Math", "Science", "English"]),
+        new Teacher("Teacher Y", ["History", "Geography", "Music"]),
+      ];
+
+      // event handler to print data of all persons in the array
+      const printData = (event: Event) => {
+        const tableBody = document.getElementById("studentDataTableBody");
+        tableBody?.innerHTML = "";
+        persons.forEach((person) => {
+          const data = person.getData();
+          const tableRow = `
+            <tr>
+              <td>${data.name}</td>
+              <td>${data.type}</td>
+              <td>${data.year}</td>
+              <td>${data.average}</td>
+            </tr>
+          `;
+          tableBody.insertAdjacentHTML("beforeend", tableRow);
+        }
+      });
+    });
+  }
+  
+  addStudentHandler(event: Event): void {
+    const name = prompt("Enter the student's name:");
+    const year = parseInt(prompt("Enter the student's year:"));
+    const grades = prompt("Enter the student's grades (separated by ','):")
+      .split(",")
+      .map(grade => parseInt(grade));
+    const student = new UniStudent(name, year, grades);
+    this.students.push(student);
+  }
+}
+
+const students: Person[] = [
+  new UniStudent("John Doe", 1, [70, 80, 90]),
+  new UniStudent("Jane Doe", 1, [80, 90, 100]),
+  new UniStudent("Jim Doe", 2, [90, 100, 90])
+];
+
+const table = new Table("studentsNamesTable", "tableBodyId", students);
+table.render();
+
+// This function is an event handler that is triggered when the "Add Name" button is clicked
+const onClickHandler = (event: Event): void => {
+  // Get the target of the event (the button that was clicked)
+  const target = event.target as HTMLButtonElement;
+
+  // Get the teacher or student row that was clicked
+  const personRow = target.parentElement?.parentElement;
+
+  // Get the data from the person
+  const data = person.getData();
+
+  // Create a new table row with the data
+  const tableRow = `
+    <tr>
+      <td>${data.name}</td>
+      <td>${data.year}</td>
+      <td>${data.getAverage().toFixed(2)}</td>
+      <td>
+        <button class="view-details-button">View Details</button>
+      </td>
+    </tr>
+  `;
+
+  // Add the new table row to the table
+  table.addRow(tableRow);
+};
+
+// Get the "Add Name" button
+const clickToWriteNameButton = document.getElementById("clickToWriteName");
+
+// Attach the onClickHandler to the button's click event
+clickToWriteNameButton.addEventListener("click", onClickHandler);
+
+// The function that will be executed when the button is clicked
+function onClickHandler(): void {
+  const name = prompt("Enter student name: ");
+  const year = parseInt(prompt("Enter student year: "));
+  const grades = prompt("Enter student grades (comma separated): ").split(",").map(grade => parseInt(grade));
+  const student = new UniStudent(name, year, grades);
+  students.push(student);
+  const table = new Table("studentsNamesTable", "tableBodyId", students);
+  table.render();
+}
+
+// Render the table for the first time, create a Table object for displaying students:
+const table = new Table("studentsNamesTable", "tableBodyId", students);
+table.render();
+
+// Attach the onClickHandler to the button's click event
+clickToWriteNameButton.addEventListener("click", onClickHandler);
+
+})();
+
+</script>
+</body>
+</html>
