@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Grades</title>
+</head>
+<body>
+  <div id="root"> //div is an HTML element that is used to create a container for other HTML elements.
+    <h1>Student Grades</h1>
+    <table> //<table> is a HTML element that is used to create a table. It contains rows and columns that can be used to display data.
+      <thead style="background-color: blue;"> //table headers (e.g. Column 1, Column 2, etc.)
+        <tr> //<tr> is a HTML element that is used to create a table row.
+          <th>Name</th> // <th>: element represents a header cell
+          <th>Year</th> // (If you need to use a table cell to display data, 
+          <th>Grades</th> //then you should use the <td> element instead of <th>. 
+          <th>Average</th> // The <td> element represents a data cell in an HTML table, containing the actual data to be displayed.)
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="students-list">
+      </tbody>
+    </table>
+    <button id="add-student-btn">Add Student</button>
+  </div>
+  <script>  //it is recommended to place scripts at the end of the <body> section, as this allows the page to load the content first, before running the script.
+    // Interface for student
+    interface Student {
+      name: string;
+      year: number;
+      grades: number[];
+      getAverage: () => number;
+      updateGrade: (index: number, value: number) => void;
+    }
+
+    // Class for student
+    class UniversityStudent implements Student {
+      name: string;
+      year: number;
+      grades: number[];
+
+      constructor(name: string, year: number, grades: number[]) {
+        this.name = name;
+        this.year = year;
+        this.grades = grades;
+      }
+
+      getAverage(): number { //': number' syntax is used in TypeScript to specify the return type of a function.
+        /*The "reduce" method is used to iterate over the "grades" array and reduce it to a single value.
+        The anonymous function passed as the first argument to "reduce" takes two arguments: "sum" and "grade".
+        The "sum" argument is the accumulated value, and the "grade" argument is the current value being processed.
+        The function adds the current value to the accumulated value, effectively summing up all the values in the "grades" array.
+        Finally, the result of the "reduce" method is divided by the length of the "grades" array to get the average.*/
+        return this.grades.reduce((sum, grade) => sum + grade) / this.grades.length;
+      }
+
+      updateGrade(index: number, value: number): void {
+        this.grades[index] = value;
+      }
+    }
+
+    // Array of students
+    //The ": UniversityStudent" syntax (below) specifies that the type of the "students" variable is constrained to be compatible with the "UniversityStudent" type.
+    const students: UniversityStudent[] = [ //another option: " :Array<UniversityStudent> = [ "
+      new UniversityStudent('John Doe', 1, [80, 90, 85]),
+      new UniversityStudent('Jane Doe', 1, [75, 85, 90]),
+      new UniversityStudent('Jim Doe', 2, [90, 95, 87]),
+    ];
+
+    // Function to render students in table
+    /*renering - generating and inserting HTML elements that represent each student object and display their information in a table format.
+    (It does not involve inserting the students into a 2D array.)*/
+    function renderStudents() {
+      const studentsList = document.getElementById('students-list'); 
+      studentsList.innerHTML = ''; //Initializes an empty string "html" which will be used to store the HTML code that will be generated.
+      students.forEach((student, index) => { //Iterates over the "students" array and for each student object, ->
+        const row = document.createElement('tr'); // -> generates the HTML code that represents that student and... ->
+        row.innerHTML = `
+          <td>${student.name}</td>
+          <td>${student.year}</td>
+          <td>${student.grades.join(', ')}</td>
+          <td>${student.getAverage()}</td>
+          <td>
+            <button class="update-grade-btn" data-index="${index}">Update</button>
+          </td>
+        `;
+        studentsList.appendChild(row); // -> appends it to the "html" string.
+      });
+    }
+
+  // Event listener for add student button
+  document.getElementById('add-student-btn').addEventListener('click', () => {
+    const name = prompt('Enter student name:');
+    const year = parseInt(prompt('Enter student year:'));
+    const grades = prompt('Enter student grades (comma-separated):').split(',').map(grade => parseInt(grade));
+
+    // Create a new student object
+    const student = new UniversityStudent(name, year, grades);
+
+    // Add the student to the students array
+    students.push(student);
+
+    // Render the updated students array
+    renderStudents();
+  });
