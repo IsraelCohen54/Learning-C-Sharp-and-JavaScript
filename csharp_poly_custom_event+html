@@ -1,0 +1,176 @@
+/*
+The example code was in C# and it demonstrated the use of custom events.
+The code consisted of an interface named "IPerson" that defined an event named "DataChanged".
+Two classes, "Student" and "Teacher", implemented the IPerson interface and provided their own custom implementations of the "DataChanged" event.
+The Student class had fields for the student's name, year in university, and an array of grades per course.
+It also calculated the average grade and had an event handler named "OnDataChanged" that was triggered whenever the student's data changed.
+The Teacher class had fields for the teacher's name and the number of courses he is teaching.
+It also had an event handler named "OnDataChanged" that was triggered whenever the teacher's data changed.
+In the main program, an array of students and an array of teachers were created and the custom events were triggered for each student and teacher.
+The event handlers printed the data for each student and teacher to the console.
+Overall, the example code demonstrated the use of custom events in C#, including event handlers, interfaces, and polymorphism.
+*/
+
+
+<html>
+  <head>
+    <title>Custom Event Example</title>
+  </head>
+  <body>
+    <h1>Custom Event Example</h1>
+  </body>
+  <script>
+  
+    using System;
+
+    // Interface for Person with a Name property
+    interface IPerson
+    {
+        string Name { get; set; }
+    }
+
+    // Class for Student
+    class Student : IPerson
+    {
+        public string Name { get; set; }
+        public int YearInUniversity { get; set; }
+        public int[] Grades { get; set; }
+        public int AverageGrade { get; set; }
+
+        public Student(string name, int yearInUniversity, int[] grades)
+        {
+            Name = name;
+            YearInUniversity = yearInUniversity;
+            Grades = grades;
+            AverageGrade = (int)Grades.Average();
+        }
+
+        // Event for printing Student data
+        public event EventHandler<EventArgs> OnDataChanged;
+
+        public void TriggerDataChanged()
+        {
+            OnDataChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    // Class for Teacher
+    class Teacher : IPerson
+    {
+        public string Name { get; set; }
+        public int NumberOfCourses { get; set; }
+
+        public Teacher(string name, int numberOfCourses)
+        {
+            Name = name;
+            NumberOfCourses = numberOfCourses;
+        }
+
+        // Event for printing Teacher data
+        public event EventHandler<EventArgs> OnDataChanged;
+
+        public void TriggerDataChanged()
+        {
+            OnDataChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    // Main program
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create an array of 3 students
+            var students = new Student[] {
+              new Student("John Doe", 1, new int[] { 85, 90, 80 }),
+              new Student("Jane Doe", 1, new int[] { 95, 92, 88 }),
+              new Student("Jim Brown", 2, new int[] { 90, 95, 90 }),
+            };
+
+            // Create an array of 2 teachers
+            var teachers = new Teacher[] {
+              new Teacher("Mr. Smith", 3),
+              new Teacher("Ms. Johnson", 2)
+            };
+
+            // Attach the event handler for printing Student data
+            foreach (var student in students)
+            {
+                student.OnDataChanged += Student_OnDataChanged;
+            }
+
+            // Attach the event handler for printing Teacher data
+            foreach (var teacher in teachers)
+            {
+                teacher.OnDataChanged += Teacher_OnDataChanged;
+            }
+
+            // Trigger the custom event for each student
+            foreach (var student in students)
+            {
+                student.TriggerDataChanged();
+            }
+
+            // Trigger the custom event for each teacher
+            foreach (var teacher in teachers)
+            {
+                teacher.TriggerDataChanged();
+            }
+
+            Console.ReadLine();
+        }
+
+        private static void Student_OnDataChanged(object sender, EventArgs e)
+{
+    var student = (Student)sender;
+    Console.WriteLine("Data changed for student: " + student.Name);
+    Console.WriteLine("Year in university: " + student.YearInUniversity);
+    Console.WriteLine("Grades: " + string.Join(", ", student.Grades));
+    Console.WriteLine("Average grade: " + student.GetAverageGrade());
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Student student1 = new Student("Alice", 1, new int[] { 85, 90, 95 });
+        Student student2 = new Student("Bob", 1, new int[] { 80, 75, 70 });
+        Student student3 = new Student("Charlie", 2, new int[] { 90, 85, 80 });
+        Student[] students = new Student[] { student1, student2, student3 };
+
+        Teacher teacher1 = new Teacher("David", 3);
+        Teacher teacher2 = new Teacher("Eva", 2);
+        Teacher[] teachers = new Teacher[] { teacher1, teacher2 };
+
+        student1.DataChanged += Student_OnDataChanged;
+        student2.DataChanged += Student_OnDataChanged;
+        student3.DataChanged += Student_OnDataChanged;
+
+        teacher1.DataChanged += Teacher_OnDataChanged;
+        teacher2.DataChanged += Teacher_OnDataChanged;
+
+        // Trigger the custom event for each student
+        foreach (var student in students)
+        {
+            student.TriggerDataChanged();
+        }
+
+        Console.WriteLine();
+
+        // Trigger the custom event for each teacher
+        foreach (var teacher in teachers)
+        {
+            teacher.TriggerDataChanged();
+        }
+    }
+
+    private static void Teacher_OnDataChanged(object sender, EventArgs e)
+    {
+        var teacher = (Teacher)sender;
+        Console.WriteLine("Data changed for teacher: " + teacher.Name);
+        Console.WriteLine("Number of courses taught: " + teacher.NumberOfCoursesTaught);
+    }
+}
+
+</script>
+</html>
