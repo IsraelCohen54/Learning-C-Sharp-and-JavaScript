@@ -1,0 +1,107 @@
+//Here's the code for a full example that implements polymorphism, interfaces, event handling, button creation, and all the relevant HTML elements:
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+      th {
+        background-color: blue;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button id="addStudentButton">Add Student</button>
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Grades</th>
+            <th>Average</th>
+          </tr>
+        </thead>
+        <tbody id="studentsTableBody"></tbody>
+      </table>
+    </div>
+    
+    <script>
+      // Define the interface for a university student
+      interface UniversityStudent {
+        name: string;
+        year: number;
+        grades: number[];
+        getAverage(): number;
+      }
+      
+      // Define the class for a university student, implementing the interface
+      class UniversityStudentImpl implements UniversityStudent {
+        name: string;
+        year: number;
+        grades: number[];
+        
+        constructor(name: string, year: number, grades: number[]) {
+          this.name = name;
+          this.year = year;
+          this.grades = grades;
+        }
+        
+        getAverage(): number {
+          return this.grades.reduce((sum, grade) => sum + grade) / this.grades.length;
+        }
+      }
+      
+      const students: UniversityStudent[] = [ 
+        new UniversityStudentImpl('John Doe', 1, [80, 90, 85]),
+        new UniversityStudentImpl('Jane Doe', 1, [75, 85, 90]),
+        new UniversityStudentImpl('Jim Doe', 2, [90, 95, 87]),
+      ];
+      
+      function renderStudents() {
+        const studentsTableBody = document.getElementById("studentsTableBody");
+        studentsTableBody.innerHTML = "";
+        
+        for (const student of students) {
+          const studentRow = document.createElement("tr");
+          
+          const nameCell = document.createElement("td");
+          nameCell.innerText = student.name;
+          studentRow.appendChild(nameCell);
+          
+          const yearCell = document.createElement("td");
+          yearCell.innerText = student.year.toString();
+          studentRow.appendChild(yearCell);
+          
+          const gradesCell = document.createElement("td");
+          gradesCell.innerText = student.grades.toString();
+          studentRow.appendChild(gradesCell);
+          
+          const averageCell = document.createElement("td");
+          averageCell.innerText = student.getAverage().toFixed(2);
+          studentRow.appendChild(averageCell);
+          
+          studentsTableBody.appendChild(studentRow);
+        }
+      }
+      
+      // Add an event handler to the "Add Student" button
+      const const addStudentButton = document.getElementById("addStudentButton");
+      addStudentButton.addEventListener("click", () => {
+      const name = prompt("Enter student name:");
+      const year = parseInt(prompt("Enter student year:"));
+      const grades = prompt("Enter student grades (comma separated):").split(",").map(grade => parseInt(grade));
+      students.push(new UniversityStudentImpl(name, year, grades));
+    renderStudents();
+  });
+  
+  renderStudents();
+</script>
+</body>
+</html>
+
+      
