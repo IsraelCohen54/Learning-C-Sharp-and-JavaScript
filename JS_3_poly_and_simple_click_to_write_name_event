@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>An Example of polymorphism in JS</title>
+  </head>
+<body>
+<button id = "clickToWriteName">Add Name</button>
+<table id="peopleTable">
+<thead>
+<tr>
+<th>Name</th>
+<th>Year/Subject</th>
+<th>Grades/Courses Taught</th>
+</tr>
+</thead>
+<tbody id"tableBodyId"></tbody>
+</table>
+<script>
+
+class Person {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Student extends Person {
+    year: number;
+    grades: number[];
+
+    constructor(name: string, age: number, year: number, grades: number[]) {
+        super(name, age);
+        this.year = year;
+        this.grades = grades;
+    }
+}
+
+class Teacher extends Person {
+    subject: string;
+    coursesTaught: number;
+
+    constructor(name: string, age: number, subject: string, coursesTaught: number) {
+        super(name, age);
+        this.subject = subject;
+        this.coursesTaught = coursesTaught;
+    }
+}
+
+const people: Person[] = [
+    new Student("John Doe", 20, 1, [80, 90, 85]),
+    new Student("Jane Doe", 21, 2, [75, 85, 90]),
+    new Teacher("Mr. Smith", 40, "Math", 5),
+    new Teacher("Ms. Johnson", 35, "English", 3)
+];
+
+const clickToWriteNameButton = document.getElementById("clickToWriteName");
+const tableBody = document.getElementById("tableBodyId");
+
+clickToWriteNameButton?.addEventListener("click", function() {
+    for (const person of people) {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("td");
+        const infoCell = document.createElement("td");
+
+        nameCell.innerText = person.name;
+        if (person instanceof Student) {
+            infoCell.innerText = `Year: ${person.year} Grades: ${person.grades.join(", ")}`;
+        } else if (person instanceof Teacher) {
+            infoCell.innerText = `Subject: ${person.subject} Courses Taught: ${person.coursesTaught}`;
+        }
+
+        row.appendChild(nameCell);
+        row.appendChild(infoCell);
+        tableBody?.appendChild(row);
+    }
+});
+
+</script>
+</body>
+</html>
