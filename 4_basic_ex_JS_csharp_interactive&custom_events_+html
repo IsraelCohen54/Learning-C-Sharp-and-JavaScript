@@ -1,0 +1,118 @@
+//1. Interactive C# code (HTML, C#):
+
+/*an interactive C# code that allows a user to update the "Hello, World!" message displayed on the page.
+When the user enters their name into the input field and clicks the submit button, the updateName function is called,
+which updates the text inside the span element with the user's input.*/
+
+<!-- language: C# (interactive) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive C# Example</title>
+  </head>
+  <body>
+    <h1>Hello, <span id="name">World</span>!</h1>   //The HTML <span> element is an inline container that is used to group and style text or other inline HTML elements. It is a generic container that does not have any semantic meaning by itself, but can be used to group together parts of a sentence, a heading, or any other text that needs to be styled in a specific way.
+    <form>
+      <label for="name-input">Enter your name:</label>
+      <input type="text" id="name-input" name="name" />
+      <button type="button" onclick="updateName()">Submit</button>
+    </form>
+    <script>
+      function updateName() {
+        var nameInput = document.getElementById('name-input');
+        var nameSpan = document.getElementById('name');
+        nameSpan.innerText = nameInput.value;
+      }
+    </script>
+  </body>
+</html>
+
+//2. Custom event C# code (HTML, C#):
+/*
+a custom event C# code that demonstrates how to create and dispatch a custom event in C#.
+When the user clicks the button, a custom event called 'my-event' is dispatched with a message attached to its detail property.
+We then listen for this event using document.addEventListener, and log the message to the console when the event is triggered.
+*/
+<!-- language: C# (custom event) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Event C# Example</title>
+  </head>
+  <body>
+    <button type="button" onclick="fireCustomEvent()">Click me</button>
+    <script>
+      function fireCustomEvent() {
+        var customEvent = new CustomEvent('my-event', { detail: { message: 'Hello from C#!' } }); //CustomEvent is a built-in JavaScript constructor function that is used to create a custom event. In this particular example, we are using CustomEvent to create an event with the name "my-event" and with a custom detail object containing a message.
+        document.dispatchEvent(customEvent); //dispatchEvent is a method that is used to trigger a custom event in JavaScript. When called, dispatchEvent sends the event to all listeners that have been registered using addEventListener.
+      }
+
+      document.addEventListener('my-event', function(event) { // The addEventListener method takes two arguments: the name of the event to listen for ('my-event')
+                                                              // , and the function to execute when the event is triggered (the anonymous function).
+                                                              // The event parameter of the anonymous function represents the CustomEvent object that is triggered
+                                                              // when the "my-event" event is dispatched using the dispatchEvent method. When the event is triggered,
+                                                              // the function is called by the browser with the CustomEvent object passed as an argument to the event parameter. 
+        console.log(event.detail.message); //event.detail.message: This is an expression that accesses the message property of the detail object attached to the event.
+      });
+    </script>
+  </body>
+</html>
+
+//JavaScript Examples:
+//3. Interactive JavaScript code (HTML, JavaScript):
+/*This example is similar to the first C# example, but uses JavaScript instead.
+The code allows a user to update the "Hello, World!" message displayed on the page using an input field and submit button.*/
+
+<!-- language: JavaScript (interactive) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive JavaScript Example</title>
+  </head>
+  <body>
+    <h1>Hello, <span id="name">World</span>!</h1>
+    <form>
+      <label for="name-input">Enter your name:</label>
+      <input type="text" id="name-input" name="name" />
+      <button type="button" onclick="updateName()">Submit</button>
+    </form>
+    <script>
+      function updateName() {
+        var nameInput = document.getElementById('name-input');
+        var nameSpan = document.getElementById('name');
+        nameSpan.innerText = nameInput.value;
+      }
+    </script>
+  </body>
+</html>
+
+//4. Custom event JavaScript code (HTML, JavaScript):
+/*
+This example is a custom event JavaScript code that demonstrates how to create and dispatch a custom event in JavaScript.
+When the page loads, the code adds an event listener to a button with the ID "my-button".
+When the button is clicked, a custom event called "my-event" is dispatched with a message attached to its detail property.
+We then listen for this event using myButton.addEventListener, and log the message to the console when the event is triggered.
+Finally, a function called fireCustomEvent is defined to trigger the event when the button is clicked.
+*/
+
+<!-- language: JavaScript (custom event) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Event JavaScript Example</title>
+  </head>
+  <body>
+    <button id="my-button">Click me</button>
+    <script>
+      var myButton = document.getElementById('my-button');
+      myButton.addEventListener('my-event', function(event) {
+        console.log(event.detail.message);
+      });
+
+      function fireCustomEvent() {
+        var customEvent = new CustomEvent('my-event', { detail: { message: 'Hello from JavaScript!' } });
+        myButton.dispatchEvent(customEvent);
+      }
+    </script>
+  </body>
+</html>
