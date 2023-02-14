@@ -1,5 +1,5 @@
 # Learning-C-Sharp and JavaScript
-C# basic and up<br>
+C# & JS basic and up<br>
 For my own use.<br>
 Have watched, been helpful: <br>
 c#: <br>
