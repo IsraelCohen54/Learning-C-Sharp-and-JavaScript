@@ -1,0 +1,96 @@
+/*In this example, we have added an event declaration to the RegisteredToUniversity interface and implemented it in the Student and Teacher classes. We have also added an event handler for the RegistrationCompleted event of the Student class.
+
+In the Main() method, we register the event handler for the RegistrationCompleted event of the Student class using a lambda expression. When the Register() method of the Student class is called, it raises the RegistrationCompleted event, which triggers the event handler to write a message to the console.
+
+This demonstrates how event handlers can be used in conjunction with server-side object-oriented programming and interfaces to create more flexible and dynamic applications.*/
+
+using System;
+
+// Define the RegisteredToUniversity interface
+interface RegisteredToUniversity {
+    event EventHandler RegistrationCompleted;
+
+    void Register();
+    void CancelRegistration();
+}
+
+// Define the Student class that implements the RegisteredToUniversity interface
+class Student : RegisteredToUniversity {
+    private string name;
+    private int id;
+
+    public event EventHandler RegistrationCompleted;
+
+    public Student(string name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public void Register() {
+        // Logic to register the student
+        Console.WriteLine("Student {0} with ID {1} has been registered.", name, id);
+
+        // Raise the RegistrationCompleted event
+        OnRegistrationCompleted();
+    }
+
+    public void CancelRegistration() {
+        // Logic to cancel the student's registration
+        Console.WriteLine("Student {0} with ID {1} has cancelled their registration.", name, id);
+    }
+
+    protected virtual void OnRegistrationCompleted() {
+        RegistrationCompleted?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+// Define the Teacher class that also implements the RegisteredToUniversity interface
+class Teacher : RegisteredToUniversity {
+    private string name;
+    private string courseName;
+
+    public event EventHandler RegistrationCompleted;
+
+    public Teacher(string name, string courseName) {
+        this.name = name;
+        this.courseName = courseName;
+    }
+
+    public void Register() {
+        // Logic to register the teacher's course
+        Console.WriteLine("Teacher {0} has registered the course {1}.", name, courseName);
+
+        // Raise the RegistrationCompleted event
+        OnRegistrationCompleted();
+    }
+
+    public void CancelRegistration() {
+        // Logic to cancel the teacher's course registration
+        Console.WriteLine("Teacher {0} has cancelled their registration for the course {1}.", name, courseName);
+    }
+
+    protected virtual void OnRegistrationCompleted() {
+        RegistrationCompleted?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+class Program {
+    static void Main(string[] args) {
+        // Create instances of Student and Teacher classes
+        Student student1 = new Student("John Doe", 1234);
+        Teacher teacher1 = new Teacher("Jane Smith", "Computer Science");
+
+        // Register an event handler for the RegistrationCompleted event of the student
+        student1.RegistrationCompleted += (sender, e) => {
+            Console.WriteLine("The student registration has been completed.");
+        };
+
+        // Register the student and teacher by calling the Register method
+        student1.Register();
+        teacher1.Register();
+
+        // Cancel the registration of the student and teacher by calling the CancelRegistration method
+        student1.CancelRegistration();
+        teacher1.CancelRegistration();
+    }
+}
