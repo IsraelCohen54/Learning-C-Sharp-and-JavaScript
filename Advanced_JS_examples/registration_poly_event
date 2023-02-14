@@ -1,0 +1,102 @@
+/*
+In this example, we define the RegisteredToUniversity interface as a JavaScript class with similar methods to the C# interface.
+The Student and Teacher classes extend the RegisteredToUniversity class and implement the required methods.
+
+We also define the addRegistrationCompletedEventHandler, removeRegistrationCompletedEventHandler,
+and raiseRegistrationCompletedEvent methods in the RegisteredToUniversity class to handle the RegistrationCompleted event.
+
+The rest of the code is similar to the C# example, with instances of the Student and Teacher classes created and their methods called,
+including registering an event handler for the RegistrationCompleted event of the Student class.
+*/
+// Define the RegisteredToUniversity interface
+class RegisteredToUniversity {
+  constructor() {
+    this.registrationCompletedEventHandlers = [];
+  }
+
+  addRegistrationCompletedEventHandler(handler) {
+    this.registrationCompletedEventHandlers.push(handler);
+  }
+
+  removeRegistrationCompletedEventHandler(handler) {
+    const index = this.registrationCompletedEventHandlers.indexOf(handler);
+    if (index >= 0) {
+      this.registrationCompletedEventHandlers.splice(index, 1);
+    }
+  }
+
+  raiseRegistrationCompletedEvent() {
+    this.registrationCompletedEventHandlers.forEach(handler => {
+      handler();
+    });
+  }
+
+  register() {
+    throw new Error('Not implemented');
+  }
+
+  cancelRegistration() {
+    throw new Error('Not implemented');
+  }
+}
+
+// Define the Student class that implements the RegisteredToUniversity interface
+class Student extends RegisteredToUniversity {
+  constructor(name, id) {
+    super();
+    this.name = name;
+    this.id = id;
+  }
+
+  register() {
+    // Logic to register the student
+    console.log(`Student ${this.name} with ID ${this.id} has been registered.`);
+
+    // Raise the RegistrationCompleted event
+    this.raiseRegistrationCompletedEvent();
+  }
+
+  cancelRegistration() {
+    // Logic to cancel the student's registration
+    console.log(`Student ${this.name} with ID ${this.id} has cancelled their registration.`);
+  }
+}
+
+// Define the Teacher class that also implements the RegisteredToUniversity interface
+class Teacher extends RegisteredToUniversity {
+  constructor(name, courseName) {
+    super();
+    this.name = name;
+    this.courseName = courseName;
+  }
+
+  register() {
+    // Logic to register the teacher's course
+    console.log(`Teacher ${this.name} has registered the course ${this.courseName}.`);
+
+    // Raise the RegistrationCompleted event
+    this.raiseRegistrationCompletedEvent();
+  }
+
+  cancelRegistration() {
+    // Logic to cancel the teacher's course registration
+    console.log(`Teacher ${this.name} has cancelled their registration for the course ${this.courseName}.`);
+  }
+}
+
+// Create instances of Student and Teacher classes
+const student1 = new Student("John Doe", 1234);
+const teacher1 = new Teacher("Jane Smith", "Computer Science");
+
+// Register an event handler for the RegistrationCompleted event of the student
+student1.addRegistrationCompletedEventHandler(() => {
+  console.log("The student registration has been completed.");
+});
+
+// Register the student and teacher by calling the Register method
+student1.register();
+teacher1.register();
+
+// Cancel the registration of the student and teacher by calling the CancelRegistration method
+student1.cancelRegistration();
+teacher1.cancelRegistration();
