@@ -1,4 +1,4 @@
-//Another example of Polymorphism:
+//Another 2 examples of Polymorphism:
 
 class Shape {
   constructor(type) {
@@ -64,3 +64,79 @@ const createShapeElements = () => {
 };
 
 createShapeElements();
+
+
+//~~~~~~~~~~~~~~~~~~~~~~
+/*In this example, we define a Student interface that includes the methods getName(), getId(), and getGrade().
+We then define two derived classes (CollegeStudent and HighSchoolStudent)
+that inherit from the Student class and implement these methods in their own way.
+Finally, we create instances of the two derived classes and call their respective methods to demonstrate polymorphism in action.
+Note that the derived classes are not required to have the exact same implementation of the interface methods, only that they have the same method signature.*/
+
+// Define the Student interface
+class Student {
+  constructor(name, id) {
+    this.name = name;
+    this.id = id;
+  }
+  
+  // Define the methods that all Student classes must implement
+  getName() {
+    throw new Error('This method must be implemented by the derived class');
+  }
+  
+  getId() {
+    throw new Error('This method must be implemented by the derived class');
+  }
+  
+  getGrade() {
+    throw new Error('This method must be implemented by the derived class');
+  }
+}
+
+// Define a derived class that implements the Student interface
+class CollegeStudent extends Student {
+  constructor(name, id, major) {
+    super(name, id);
+    this.major = major;
+  }
+  
+  getName() {
+    return this.name;
+  }
+  
+  getId() {
+    return this.id;
+  }
+  
+  getGrade() {
+    return 'A';
+  }
+}
+
+// Define another derived class that implements the Student interface
+class HighSchoolStudent extends Student {
+  constructor(name, id, gradeLevel) {
+    super(name, id);
+    this.gradeLevel = gradeLevel;
+  }
+  
+  getName() {
+    return this.name;
+  }
+  
+  getId() {
+    return this.id;
+  }
+  
+  getGrade() {
+    return 'B';
+  }
+}
+
+// Usage example
+let collegeStudent = new CollegeStudent('John', 1234, 'Computer Science');
+let highSchoolStudent = new HighSchoolStudent('Jane', 5678, 10);
+
+console.log(collegeStudent.getName()); // Output: John
+console.log(highSchoolStudent.getGrade()); // Output: B
